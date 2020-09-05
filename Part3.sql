@@ -1,4 +1,4 @@
-*/How many albums does the artist Led Zeppelin have?*/
+/*How many albums does the artist Led Zeppelin have?*/
 SELECT COUNT(Albumid)  
 FROM albums
 WHERE Artistid  = (SELECT Artistid FROM artists WHERE name = 'Led Zeppelin')

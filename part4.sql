@@ -14,7 +14,7 @@ select c.firstName
 ,substr(c.lastName,1,2) AS LSN 
 ,LOWER (substr(c.FirstName, 1, 4) || substr(c.LastName,1,2)) as NewID
 from customers c
-where firstName ='Robert' 
+
                                             
 /*Show a list of employees who have worked for the company for 15 or 
 more years using the current date function. Sort by lastname ascending.*/
@@ -26,4 +26,21 @@ where Hire >= 15
 order by e.lastName asc
                                             
 /*Profiling the Customers table, answer the following question.*/
+select *
+from Customers c
+where c.Company is null 
                                             
+/*Find the cities with the most customers and rank in descending order.*/
+select c.City, count(c.CustomerId)
+from Customers c
+group by c.City
+order by count(c.CustomerId) DESC
+
+/*Create a new customer invoice id by combining a customer’s invoice id with their first and last name 
+ while ordering your query in the following order: firstname, lastname, and invoiceID.*/ 
+ select c.FirstName || c.LastName || i.InvoiceId as NewInvoiceId
+from Customers c
+left join Invoices i
+on c.CustomerId = i.CustomerId
+where NewInvoiceId like 'AstridGruber%'
+order by c.FirstName, c.LastName, i.InvoiceId                                           
